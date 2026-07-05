@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRIPZONE — Accesorios de Pádel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --court:#1E56C8;      /* azul césped de cancha */
+    --court-deep:#123A8F;
+    --ball:#D9F24B;       /* amarillo flúor pelota */
+    --night:#0C1220;      /* pared de blindex de noche */
+    --sand:#F2F0EA;
+    --ink:#101828;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Space Grotesk',sans-serif;background:var(--sand);color:var(--ink)}
+  h1,h2,.price,.tag{font-family:'Anton',sans-serif;letter-spacing:.5px}
+
+  /* barra superior */
+  nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;
+      padding:14px 6vw;background:var(--night);color:#fff}
+  .logo{font-family:'Anton',sans-serif;font-size:1.4rem;color:var(--ball)}
+  .logo span{color:#fff}
+  nav a.cta{background:var(--ball);color:var(--night);text-decoration:none;font-weight:700;
+      padding:10px 18px;border-radius:999px;font-size:.9rem}
+
+  /* hero con textura de grip */
+  header{
+    background:
+      repeating-linear-gradient(-35deg, rgba(255,255,255,.045) 0 14px, transparent 14px 34px),
+      linear-gradient(160deg, var(--court) 0%, var(--court-deep) 70%);
+    color:#fff;padding:11vh 6vw 9vh;position:relative;overflow:hidden}
+  header h1{font-size:clamp(2.6rem,7.5vw,5.4rem);line-height:.98;text-transform:uppercase;max-width:14ch}
+  header h1 em{font-style:normal;color:var(--ball)}
+  header p{margin-top:22px;max-width:46ch;font-size:1.05rem;color:#DCE6FF}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;text-decoration:none;font-weight:700;padding:15px 26px;border-radius:999px;font-size:1rem}
+  .btn-ball{background:var(--ball);color:var(--night)}
+  .btn-ghost{border:2px solid rgba(255,255,255,.5);color:#fff}
+  .btn-ball:hover{transform:translateY(-2px)}
+  .btn{transition:transform .15s ease}
+  .ball{position:absolute;right:-60px;top:18%;width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #EEFF7A, #C7E01F 65%, #9DB50E);
+    box-shadow:0 30px 60px rgba(0,0,0,.35);opacity:.9}
+  .ball::after{content:"";position:absolute;inset:0;border-radius:50%;
+    border:6px solid rgba(255,255,255,.55);clip-path:inset(0 0 0 52%)}
+  @media(max-width:720px){.ball{width:150px;height:150px;right:-40px;top:8%}}
+
+  /* franja marquesina */
+  .strip{background:var(--ball);color:var(--night);font-family:'Anton',sans-serif;
+    text-transform:uppercase;white-space:nowrap;overflow:hidden;padding:10px 0;font-size:1rem}
+  .strip div{display:inline-block;animation:slide 18s linear infinite}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){.strip div{animation:none}}
+
+  section{padding:70px 6vw}
+  .eyebrow{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--court)}
+  h2{font-size:clamp(1.9rem,4.5vw,3rem);text-transform:uppercase;margin:8px 0 36px}
+
+  /* productos */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+  .card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid #E4E2DA;
+    display:flex;flex-direction:column;transition:transform .15s ease,box-shadow .15s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(16,24,40,.12)}
+  .thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:3.4rem;
+    background:repeating-linear-gradient(-35deg,#EDF1FB 0 12px,#E2E9FA 12px 24px)}
+  .card .body{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .tag{display:inline-block;background:var(--night);color:var(--ball);font-size:.7rem;
+    padding:4px 10px;border-radius:999px;width:max-content;text-transform:uppercase}
+  .card h3{font-size:1.15rem}
+  .card p{font-size:.9rem;color:#5A6472;flex:1}
+  .price{font-size:1.5rem;color:var(--court-deep)}
+  .price small{font-family:'Space Grotesk';font-size:.75rem;color:#8A93A2;font-weight:500}
+  .buy{background:var(--court);color:#fff;text-align:center;text-decoration:none;
+    padding:12px;border-radius:12px;font-weight:700}
+  .buy:hover{background:var(--court-deep)}
+
+  /* por qué */
+  .why{background:var(--night);color:#fff}
+  .why .eyebrow{color:var(--ball)}
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:26px}
+  .why-item{border-top:3px solid var(--ball);padding-top:16px}
+  .why-item strong{display:block;font-size:1.05rem;margin-bottom:6px}
+  .why-item p{color:#AAB4C6;font-size:.92rem}
+
+  /* faq / envíos */
+  .faq details{background:#fff;border:1px solid #E4E2DA;border-radius:14px;padding:18px 22px;margin-bottom:12px}
+  .faq summary{font-weight:700;cursor:pointer}
+  .faq p{margin-top:10px;color:#5A6472;font-size:.95rem}
+
+  footer{background:var(--night);color:#8A93A2;padding:44px 6vw;font-size:.85rem;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  footer .logo{font-size:1.1rem}
+  .wa-float{position:fixed;bottom:22px;right:22px;background:#25D366;color:#fff;width:58px;height:58px;
+    border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7rem;
+    text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:20}
+  a:focus-visible,summary:focus-visible{outline:3px solid var(--court);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">GRIP<span>ZONE</span></div>
+  <a class="cta" href="https://wa.me/5491100000000?text=Hola!%20Quiero%20pedir%20grips" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+</nav>
+
+<header>
+  <div class="ball" aria-hidden="true"></div>
+  <p class="eyebrow" style="color:var(--ball)">Accesorios de pádel · Buenos Aires</p>
+  <h1>Tu paleta,<br>siempre con <em>grip nuevo</em>.</h1>
+  <p>Overgrips premium, protectores y presurizadores al mejor precio del país. Comprás hoy, jugás el finde. Envíos a todo el país y entregas en mano en CABA/GBA.</p>
+  <div class="hero-actions">
+    <a class="btn btn-ball" href="#catalogo">Ver catálogo</a>
+    <a class="btn btn-ghost" href="#mayorista">Precio mayorista</a>
+  </div>
+</header>
+
+<div class="strip" aria-hidden="true"><div>
+  ENVÍOS A TODO EL PAÍS &nbsp;★&nbsp; PACK X3 Y X10 &nbsp;★&nbsp; DESCUENTO POR TRANSFERENCIA &nbsp;★&nbsp; REVENDEDORES BIENVENIDOS &nbsp;★&nbsp;
+  ENVÍOS A TODO EL PAÍS &nbsp;★&nbsp; PACK X3 Y X10 &nbsp;★&nbsp; DESCUENTO POR TRANSFERENCIA &nbsp;★&nbsp; REVENDEDORES BIENVENIDOS &nbsp;★&nbsp;
+</div></div>
+
+<section id="catalogo">
+  <p class="eyebrow">Catálogo</p>
+  <h2>Lo que se gasta, lo tenés que reponer</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="thumb">🎾</div>
+      <div class="body">
+        <span class="tag">Más vendido</span>
+        <h3>Overgrip Pro — Pack x3</h3>
+        <p>PU tacky antideslizante, absorbe transpiración. Colores: negro, blanco, flúor. Dura 3–4 semanas de juego.</p>
+        <div class="price">$8.900 <small>ARS · pack x3</small></div>
+        <a class="buy" href="https://wa.me/5491100000000?text=Quiero%20el%20pack%20x3%20de%20overgrips" target="_blank" rel="noopener">Pedir</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="thumb">🧵</div>
+      <div class="body">
+        <span class="tag">Mejor precio x unidad</span>
+        <h3>Overgrip Pro — Pack x10</h3>
+        <p>Para los que juegan 3+ veces por semana o quieren compartir con el grupo. Mezclá colores como quieras.</p>
+        <div class="price">$24.900 <small>ARS · pack x10</small></div>
+        <a class="buy" href="https://wa.me/5491100000000?text=Quiero%20el%20pack%20x10%20de%20overgrips" target="_blank" rel="noopener">Pedir</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="thumb">🛡️</div>
+      <div class="body">
+        <span class="tag">Cuidá la paleta</span>
+        <h3>Protector de paleta</h3>
+        <p>Cinta transparente o negra que salva el marco de los raspones contra el blindex. Fácil de aplicar.</p>
+        <div class="price">$7.500 <small>ARS · c/u</small></div>
+        <a class="buy" href="https://wa.me/5491100000000?text=Quiero%20un%20protector%20de%20paleta" target="_blank" rel="noopener">Pedir</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="thumb">🫙</div>
+      <div class="body">
+        <span class="tag">Novedad</span>
+        <h3>Presurizador de pelotas</h3>
+        <p>Mantiene la presión de hasta 3 pelotas entre partidos. Las pelotas te duran el doble.</p>
+        <div class="price">$19.900 <small>ARS · c/u</small></div>
+        <a class="buy" href="https://wa.me/5491100000000?text=Quiero%20un%20presurizador" target="_blank" rel="noopener">Pedir</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="mayorista">
+  <p class="eyebrow">Por qué GRIPZONE</p>
+  <h2>Jugamos de local</h2>
+  <div class="why-grid">
+    <div class="why-item"><strong>Precio directo</strong><p>Importamos sin intermediarios. Un grip de marca sale $6.000+; el nuestro, la mitad y con la misma tela PU.</p></div>
+    <div class="why-item"><strong>Entrega rápida</strong><p>Stock en Buenos Aires. Coordinamos en mano en CABA/GBA o despachamos por correo en 24 hs.</p></div>
+    <div class="why-item"><strong>Revendedores</strong><p>¿Tenés club, tienda o das clases? Precio mayorista desde 30 unidades. Escribinos y armamos tu lista.</p></div>
+    <div class="why-item"><strong>Compra fácil</strong><p>Todo por WhatsApp: elegís, transferís o pagás por Mercado Pago, y listo. Sin vueltas.</p></div>
+  </div>
+</section>
+
+<section class="faq">
+  <p class="eyebrow">Preguntas</p>
+  <h2>Antes de pedir</h2>
+  <details><summary>¿Cada cuánto se cambia el overgrip?</summary><p>Si jugás 2–3 veces por semana, cada 3 o 4 semanas. Cuando el grip se pone liso o brilloso, ya perdió agarre.</p></details>
+  <details><summary>¿Hacen envíos al interior?</summary><p>Sí, por Correo Argentino o Andreani a todo el país. El costo se calcula según tu código postal.</p></details>
+  <details><summary>¿Cómo pago?</summary><p>Transferencia (con descuento), Mercado Pago o efectivo si es entrega en mano.</p></details>
+  <details><summary>¿Sirven para pádel y tenis?</summary><p>Sí, el overgrip es universal: pádel, tenis, squash y bádminton.</p></details>
+</section>
+
+<footer>
+  <div><div class="logo">GRIP<span style="color:#fff">ZONE</span></div><p>Accesorios de pádel · Buenos Aires, Argentina</p></div>
+  <div><p>Instagram: @gripzone.ar</p><p>WhatsApp: +54 9 11 0000-0000</p></div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5491100000000" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">💬</a>
+
+</body>
+</html>
